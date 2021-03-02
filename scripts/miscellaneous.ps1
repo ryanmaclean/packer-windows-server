@@ -1,5 +1,5 @@
 # Disable automatic start ServerManager
 Get-ScheduledTask -TaskName ServerManager | Disable-ScheduledTask -Verbose
 
-# Disable network discovery prompt
-netsh advfirewall firewall set rule group="Network Discovery" new enable=No
+# Remove link to GCloud SDK Shell
+Remove-Item -Path 'C:\Users\Public\Desktop\Google Cloud SDK Shell.lnk' -Force

@@ -1,4 +1,4 @@
-Write-Output "+++ Running Chocolatey… +++"
+Write-Output "+++ Running Chocolatey +++"
 
 # clean exit or reboot pending: https://chocolatey.org/docs/commandsinstall#exit-codes
 $validExitCodes = 0, 3010

@@ -1,10 +1,10 @@
-source "googlecompute" "windows-server" {
+source "googlecompute" "windows-dc" {
   communicator      = "winrm"
   disk_size         = 100
   disk_type         = "pd-ssd"
-  image_description = "Windows Server instance for use within Instruqt platform"
-  image_name        = "windows-server-{{timestamp}}"
-  image_family      = "windows-server"
+  image_description = "Windows Domain Controller instance for use within Instruqt platform"
+  image_name        = "windows-dc-{{timestamp}}"
+  image_family      = "windows-dc"
   machine_type      = "n1-standard-2"
   metadata = {
     windows-shutdown-script-ps1 = "C:/cleanup-packer.ps1"
@@ -23,7 +23,7 @@ source "googlecompute" "windows-server" {
 }
 
 build {
-  sources = ["source.googlecompute.windows-server"]
+  sources = ["source.googlecompute.windows-dc"]
 
   provisioner "file" {
     destination = "C:/packages.config"
@@ -44,8 +44,19 @@ build {
       "./scripts/browser-settings.ps1",
       "./scripts/install-myrtille.ps1",
       "./scripts/install-openssh.ps1",
+      "./scripts/install-ad-domain-services.ps1",
     ]
     valid_exit_codes = [0, 3010]
+  }
+  provisioner "windows-restart" {
+    restart_timeout = "60m"
+  }
+  provisioner "powershell" {
+    elevated_user     = "SYSTEM"
+    elevated_password = ""
+    scripts = [
+      "./scripts/install-ad-domain-forest.ps1",
+    ]
   }
   provisioner "windows-restart" {
     restart_timeout = "60m"

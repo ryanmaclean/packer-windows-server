@@ -1,4 +1,5 @@
-# Disable-WindowsOptionalFeature -FeatureName Internet-Explorer-Optional-amd64 -Online
+# Write-Output "Disabling Internet Explorer"
+# dism /online /Disable-Feature /NoRestart /FeatureName:Internet-Explorer-Optional-amd64
 
 $url = "https://kolbi.cz/SetDefaultBrowser.zip"
 $output = "C:\SetDefaultBrowser.zip"
@@ -12,8 +13,12 @@ Start-Process $exe -ArgumentList 'HKLM "Microsoft Edge" delay=1000' -Wait
 Remove-Item -Path $output -Force
 Remove-Item -Path "C:\SetDefaultBrowser" -Recurse -Force
 
-New-Item -Path HKLM:\Software\Policies\Microsoft\Edge -Force | Out-Null
-New-ItemProperty -Path HKLM:\Software\Policies\Microsoft\Edge -Name RestoreOnStartup -Value 0x00000004 -PropertyType DWORD -Force | Out-Null
+New-Item -Path HKLM:\Software\Policies\Microsoft\Edge -Force
+New-ItemProperty -Path HKLM:\Software\Policies\Microsoft\Edge -Name RestoreOnStartup -Value 0x00000004 -PropertyType DWORD -Force
+New-ItemProperty -Path HKLM:\Software\Policies\Microsoft\Edge -Name HideFirstRunExperience -Value 0x00000001 -PropertyType DWORD -Force
 
-New-Item -Path HKLM:\Software\Policies\Microsoft\Edge -Name RestoreOnStartupURLs -Force | Out-Null
-Set-Itemproperty -Path HKLM:\Software\Policies\Microsoft\Edge\RestoreOnStartupURLs -Name 1 -Value "https://instruqt.com" | Out-Null
+New-Item -Path HKLM:\Software\Policies\Microsoft\Edge -Name RestoreOnStartupURLs -Force
+Set-Itemproperty -Path HKLM:\Software\Policies\Microsoft\Edge\RestoreOnStartupURLs -Name 1 -Value "https://instruqt.com"
+
+Write-Output ""
+Write-Output "Browser settings applied successfully!"
