@@ -1,6 +1,6 @@
 source "googlecompute" "windows-server" {
   communicator      = "winrm"
-  disk_size         = 100
+  disk_size         = 60
   disk_type         = "pd-ssd"
   image_description = "Windows Server instance for use within Instruqt platform"
   image_name        = "windows-server-{{timestamp}}"
@@ -13,8 +13,8 @@ source "googlecompute" "windows-server" {
   network             = "default"
   on_host_maintenance = "TERMINATE"
   project_id          = "instruqt"
-  region              = "europe-west1"
-  zone                = "europe-west1-b"
+  region              = "us-west1"
+  zone                = "us-west1-b"
   source_image_family = "windows-2019"
   tags                = ["allow-winrm-ingress-to-packer"]
   winrm_insecure      = true
@@ -48,7 +48,7 @@ build {
     valid_exit_codes = [0, 3010]
   }
   provisioner "windows-restart" {
-    restart_timeout = "60m"
+    restart_timeout = "15m"
   }
   provisioner "powershell" {
     inline = [
