@@ -3,7 +3,7 @@
 This repo contains source files for building Windows Server and Active Directory images that can be used with Instruqt.
 
 * Based on GCE windows-2019
-* Installs [Myrtille](https://myrtille.io) for HTML5 RDP access
+* Installs [Myrtille](https://myrtille.io) (Apache 2.0 license) for HTML5 RDP access
 * Enables OpenSSH
 * Installs Edge
 
