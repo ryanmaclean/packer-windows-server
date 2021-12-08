@@ -1,4 +1,4 @@
-$password = "Passw0rd!"
+$password = "Passw0rd!" #TODO - MAKE THIS AN ENV VAR
 $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
 $DomainName = "instruqt.local"
 
