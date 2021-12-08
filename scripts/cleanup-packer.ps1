@@ -4,7 +4,7 @@ function Remove-Chocolatey{
             This function removes chocolatey binaries and local configs such as env var.
             Also removes local copy of packages.config file that was used to bootstrap machine
     #>
-    Write-Output "+++ Deleting Chocolatey package config file +++"
+    Write-Output "Deleting Chocolatey package config file"
     Remove-Item -Path C:\packages.config
 
     if (!$env:ChocolateyInstall) {
@@ -60,7 +60,7 @@ function Remove-PackerUser{
     param(
         [String] $userAccount # default, packer_user
     )
-    Write-Output "+++ Removing local user account for packer +++"
+    Write-Output "Removing local user account for packer"
     Remove-LocalUser -Name $userAccount
 }
 
@@ -70,7 +70,7 @@ function Remove-WinRMConfig {
             This undos the winrm config set up for packer. Removes local cert, listener, firewall rules and disables windows service from starting
     #>
 
-    Write-Output "+++ Removing Packer WinRM and required configs +++"
+    Write-Output "Removing Packer WinRM and required configs"
     # Remove HTTP listener and deleting the self-signed cert for packer winrm connection
     Remove-Item -Path WSMan:\Localhost\listener\listener* -Recurse
     # Deleting selfsigned cert used for HTTPS connection
@@ -79,7 +79,7 @@ function Remove-WinRMConfig {
     # Closing WinRM HTTPS firewall
     $firewallRuleName = "WinRM"
     Remove-NetFirewallRule -DisplayName $firewallRuleName
-    Write-Output "+++ Disabling WinRM +++"
+    Write-Output "Disabling WinRM"
     Disable-PSRemoting
     # Disabling local winrm service from auto starting
     Stop-Service -Name winrm
