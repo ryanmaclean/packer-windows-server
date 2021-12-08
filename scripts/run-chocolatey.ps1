@@ -1,11 +1,11 @@
-Write-Output "+++ Running Chocolatey +++"
+Write-Output "Running Chocolatey"
 
 # clean exit or reboot pending: https://chocolatey.org/docs/commandsinstall#exit-codes
 $validExitCodes = 0, 3010
 
 # Globally Auto confirm every action
 $commandAutoConfirm = 'choco feature enable -n allowGlobalConfirmation'
-$commandInstall = 'choco install C:\packages.config -y --no-progress'
+$commandInstall = 'choco install C:\packages.config -y'
 
 try
 {
