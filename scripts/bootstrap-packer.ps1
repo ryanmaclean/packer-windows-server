@@ -1,6 +1,6 @@
 # https://docs.microsoft.com/en-us/windows/win32/winrm/winrm-powershell-commandlets
 
-Write-Output "+++ Running Bootstrap Script for setting up packer +++"
+Write-Output "Running Bootstrap Script for setting up packer"
 
 Set-ExecutionPolicy Unrestricted -Scope LocalMachine -Force -ErrorAction Ignore
 
